@@ -1,0 +1,25 @@
+version: '3'
+services:
+  archive:
+    container_name: ms-archive-sandbox
+    image: 'ms-archive:latest'
+    restart: always
+    depends_on:
+      - ms-archive-sandbox-wiremock
+    links:
+      - ms-archive-sandbox-wiremock:wiremock
+    ports:
+      - '5656:5656'
+    environment:
+      - SERVER_PORT=5656
+      - SPRING_PROFILES_ACTIVE=sandbox
+      - FORMPIPE_PROXY_BASE_URL=http://wiremock:8080/formpipe-proxy
+
+  ms-archive-sandbox-wiremock:
+    container_name: ms-archive-sandbox-wiremock
+    image: wiremock/wiremock:2.32.0
+    restart: always
+    expose:
+      - '8080'
+    volumes:
+      - $PWD/src/sandbox/wiremock:/home/wiremock

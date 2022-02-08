@@ -1,0 +1,25 @@
+{
+  "id" : "40B0A0EC-C88F-4FF6-B02A-27049428EFF0",
+  "name" : "formpipeproxy_import_failure",
+  "priority": 1,
+  "request" : {
+    "url" : "/formpipe-proxy/api/import",
+    "method" : "POST",
+    "bodyPatterns": [{
+      "matchesJsonPath": {
+        "expression": "$..FileName",
+        "contains": "fail"
+      }
+    }]
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "responses/formpipeproxy-failure.response.json",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8"
+    }
+  },
+  "uuid" : "40B0A0EC-C88F-4FF6-B02A-27049428EFF0",
+  "persistent" : true,
+  "insertionIndex" : 2
+}
