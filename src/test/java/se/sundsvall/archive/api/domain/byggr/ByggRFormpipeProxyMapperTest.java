@@ -1,0 +1,56 @@
+package se.sundsvall.archive.api.domain.byggr;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
+import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
+
+class ByggRFormpipeProxyMapperTest {
+
+    private final ByggRFormpipeProxyMapper mapper = new ByggRFormpipeProxyMapper();
+
+    @Test
+    void test_mapRequest() {
+        var attachment = new Attachment();
+        attachment.setName("someName");
+        attachment.setExtension("someExtension");
+        attachment.setFile("someFile");
+
+        var archiveRequest = new ByggRArchiveRequest();
+        archiveRequest.setMetadata("someMetadata");
+        archiveRequest.setAttachment(attachment);
+
+        var importRequest = mapper.map(archiveRequest);
+        assertThat(importRequest.getSubmissionAgreementId())
+            .isEqualTo(ByggRFormpipeProxyMapper.SUBMISSION_AGREEMENT_ID);
+        assertThat(importRequest.getUuid()).isNotBlank();
+        assertThat(importRequest.getMetadataXml()).isEqualTo(mapper.toBase64("someMetadata"));
+        assertThat(importRequest.getConfidentialityLevel()).isEqualTo(0);
+        assertThat(importRequest.getPreservationObject()).satisfies(preservationObject -> {
+            assertThat(preservationObject.getFileName()).isEqualTo("someName");
+            assertThat(preservationObject.getFileExtension()).isEqualTo("someExtension");
+            assertThat(preservationObject.getData()).isEqualTo("someFile");
+        });
+    }
+
+    @Test
+    void test_mapResponse() {
+        var errorDetails = new ImportResponse.ErrorDetails();
+        errorDetails.setErrorCode(999);
+        errorDetails.setErrorMessage("someErrorMessage");
+        errorDetails.setServiceName("someServiceName");
+
+        var importResponse = new ImportResponse();
+        importResponse.setImportedFileSetId("someImportedFileSetId");
+        importResponse.setErrorDetails(errorDetails);
+
+        var archiveResponse = mapper.map(importResponse);
+        assertThat(archiveResponse.getArchiveId()).isEqualTo("someImportedFileSetId");
+        assertThat(archiveResponse.getErrorDetails()).satisfies(e -> {
+            assertThat(e.getErrorCode()).isEqualTo(999);
+            assertThat(e.getErrorMessage()).isEqualTo("someErrorMessage");
+            assertThat(e.getServiceName()).isEqualTo("someServiceName");
+        });
+    }
+}
