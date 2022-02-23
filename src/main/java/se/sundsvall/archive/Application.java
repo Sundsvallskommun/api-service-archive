@@ -1,9 +1,10 @@
 package se.sundsvall.archive;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+import se.sundsvall.dept44.ServiceApplication;
+
+@ServiceApplication
 public class Application {
 
 	public static void main(String[] args) {

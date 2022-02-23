@@ -5,13 +5,17 @@
 	<parent>
 		<groupId>se.sundsvall.dept44</groupId>
 		<artifactId>dept44-service-parent</artifactId>
-		<version>0.5-SNAPSHOT</version>
+		<version>0.6-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.sundsvall</groupId>
 	<artifactId>api-service-archive</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<name>api-service-archive</name>
+
+	<properties>
+		<docker.image.name>ms-archive</docker.image.name>
+	</properties>
 
 	<dependencies>
 		<!-- Test -->
@@ -48,17 +52,6 @@
 					<excludes>
 						<exclude>**/se/sundsvall/archive/Application*</exclude>
 					</excludes>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<name>ms-archive:${project.version}</name>
-						<tags>ms-archive:latest</tags>
-					</image>
 				</configuration>
 			</plugin>
 		</plugins>
