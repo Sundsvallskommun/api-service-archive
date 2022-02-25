@@ -9,9 +9,8 @@ services:
     links:
       - ms-archive-sandbox-wiremock:wiremock
     ports:
-      - '5656:5656'
+      - '9051:8080'
     environment:
-      - SERVER_PORT=5656
       - SPRING_PROFILES_ACTIVE=sandbox
       - FORMPIPE_PROXY_BASE_URL=http://wiremock:8080/formpipe-proxy
 
