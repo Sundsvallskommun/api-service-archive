@@ -3,6 +3,7 @@ package se.sundsvall.archive.api.domain.byggr;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import se.sundsvall.archive.api.domain.ArchiveResponse;
@@ -13,12 +14,17 @@ import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 @Component
 public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiveRequest, ArchiveResponse> {
 
-    static final String SUBMISSION_AGREEMENT_ID = "AGS";
+    private final String submissionAgreementId;
+
+    public ByggRFormpipeProxyMapper(
+            @Value("${byggr.submission-agreement-id}") final String submissionAgreementId) {
+        this.submissionAgreementId = submissionAgreementId;
+    }
 
     @Override
     public ImportRequest map(final ByggRArchiveRequest byggRArchiveRequest) {
         return ImportRequest.builder()
-            .withSubmissionAgreementId(SUBMISSION_AGREEMENT_ID)
+            .withSubmissionAgreementId(submissionAgreementId)
             .withUuid(UUID.randomUUID().toString())
             .withMetadataXml(toBase64(byggRArchiveRequest.getMetadata()))
             //.withPersonalDataFlag(false)

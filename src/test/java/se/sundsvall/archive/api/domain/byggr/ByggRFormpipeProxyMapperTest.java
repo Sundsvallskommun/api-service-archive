@@ -8,7 +8,9 @@ import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 
 class ByggRFormpipeProxyMapperTest {
 
-    private final ByggRFormpipeProxyMapper mapper = new ByggRFormpipeProxyMapper();
+    private static final String SUBMISSION_AGREEMENT_ID = "someSubmissionAgreementId";
+
+    private final ByggRFormpipeProxyMapper mapper = new ByggRFormpipeProxyMapper(SUBMISSION_AGREEMENT_ID);
 
     @Test
     void test_mapRequest() {
@@ -22,8 +24,7 @@ class ByggRFormpipeProxyMapperTest {
         archiveRequest.setAttachment(attachment);
 
         var importRequest = mapper.map(archiveRequest);
-        assertThat(importRequest.getSubmissionAgreementId())
-            .isEqualTo(ByggRFormpipeProxyMapper.SUBMISSION_AGREEMENT_ID);
+        assertThat(importRequest.getSubmissionAgreementId()).isEqualTo(SUBMISSION_AGREEMENT_ID);
         assertThat(importRequest.getUuid()).isNotBlank();
         assertThat(importRequest.getMetadataXml()).isEqualTo(mapper.toBase64("someMetadata"));
         assertThat(importRequest.getConfidentialityLevel()).isEqualTo(0);
