@@ -3,13 +3,15 @@ package se.sundsvall.archive.integration.formpipeproxy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 
+@ActiveProfiles("junit")
 class FormpipeProxyMapperTest {
 
-    private FormpipeProxyMapper<String, String> mapper = new FormpipeProxyMapper<>() {
+    private final FormpipeProxyMapper<String, String> mapper = new FormpipeProxyMapper<>() {
 
         @Override
         public ImportRequest map(final String s) {

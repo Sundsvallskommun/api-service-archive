@@ -5,7 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("junit")
 class ImportRequestTest {
 
     private static final LocalDateTime CONFIDENTIALITY_DEGRADATION_DATE = LocalDateTime.now().plusYears(1);

@@ -51,6 +51,8 @@
 				<configuration>
 					<excludes>
 						<exclude>**/se/sundsvall/archive/Application*</exclude>
+						<exclude>**/se/sundsvall/archive/integration/formpipeproxy/FormpipeProxyIntegrationConfiguration*</exclude>
+						<exclude>**/se/sundsvall/archive/integration/formpipeproxy/FormpipeProxyIntegrationProperties*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

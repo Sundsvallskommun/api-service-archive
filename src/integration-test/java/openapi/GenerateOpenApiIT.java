@@ -23,7 +23,11 @@ import net.javacrumbs.jsonunit.core.internal.Options;
 @SpringBootTest(
     webEnvironment = WebEnvironment.RANDOM_PORT,
     classes = Application.class,
-    properties = "logging.level.se.sundsvall.dept44.payload=OFF"
+    properties = {
+        "integration.formpipe-proxy.base-url=http://dummy",
+        "spring.main.banner-mode=off",
+        "logging.level.se.sundsvall.dept44.payload=OFF"
+    }
 )
 class GenerateOpenApiIT {
 
