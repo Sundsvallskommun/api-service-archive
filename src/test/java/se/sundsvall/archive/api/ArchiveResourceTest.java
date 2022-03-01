@@ -14,7 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import se.sundsvall.archive.api.domain.ArchiveResponse;
 import se.sundsvall.archive.api.domain.byggr.ByggRArchiveRequest;
+import se.sundsvall.archive.api.domain.byggr.ByggRArchiveRequest2;
 import se.sundsvall.archive.api.domain.byggr.ByggRFormpipeProxyMapper;
+import se.sundsvall.archive.api.domain.byggr.ByggRFormpipeProxyMapper2;
 import se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
@@ -26,12 +28,15 @@ class ArchiveResourceTest {
     private FormpipeProxyIntegration mockFormpipeProxyIntegration;
     @Mock
     private ByggRFormpipeProxyMapper mockByggRFormpipeProxyMapper;
+    @Mock
+    private ByggRFormpipeProxyMapper2 mockByggRFormpipeProxyMapper2;
 
     private ArchiveResource archiveResource;
 
     @BeforeEach
     void setUp() {
-        archiveResource = new ArchiveResource(mockFormpipeProxyIntegration, mockByggRFormpipeProxyMapper);
+        archiveResource = new ArchiveResource(mockFormpipeProxyIntegration,
+            mockByggRFormpipeProxyMapper, mockByggRFormpipeProxyMapper2);
     }
 
     @Test
@@ -50,5 +55,23 @@ class ArchiveResourceTest {
         verify(mockByggRFormpipeProxyMapper, times(1)).map(any(ByggRArchiveRequest.class));
         verify(mockFormpipeProxyIntegration, times(1)).doImport(any(ImportRequest.class));
         verify(mockByggRFormpipeProxyMapper, times(1)).map(any(ImportResponse.class));
+    }
+
+    @Test
+    void test_successful_byggR2_shouldReturnResponse() {
+        when(mockByggRFormpipeProxyMapper2.map(any(ByggRArchiveRequest2.class)))
+            .thenReturn(new ImportRequest());
+        when(mockFormpipeProxyIntegration.doImport(any(ImportRequest.class)))
+            .thenReturn(new ImportResponse());
+        when(mockByggRFormpipeProxyMapper2.map(any(ImportResponse.class)))
+            .thenReturn(new ArchiveResponse());
+
+        var archiveResponse = archiveResource.byggR2(new ByggRArchiveRequest2());
+
+        assertThat(archiveResponse).isNotNull();
+
+        verify(mockByggRFormpipeProxyMapper2, times(1)).map(any(ByggRArchiveRequest2.class));
+        verify(mockFormpipeProxyIntegration, times(1)).doImport(any(ImportRequest.class));
+        verify(mockByggRFormpipeProxyMapper2, times(1)).map(any(ImportResponse.class));
     }
 }
