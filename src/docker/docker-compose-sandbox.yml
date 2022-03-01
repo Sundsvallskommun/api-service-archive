@@ -11,8 +11,10 @@ services:
     ports:
       - '9051:8080'
     environment:
+      - JAVA_OPTS=-server -Dfile.encoding=UTF-8 -Xms128m -Xmx256m
       - SPRING_PROFILES_ACTIVE=sandbox
       - FORMPIPE_PROXY_BASE_URL=http://wiremock:8080/formpipe-proxy
+      - BYGGR_SUBMISSION_AGREEMENT_ID=AGS
 
   ms-archive-sandbox-wiremock:
     container_name: ms-archive-sandbox-wiremock

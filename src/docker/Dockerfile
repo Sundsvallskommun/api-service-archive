@@ -10,7 +10,5 @@ COPY --from=builder snapshot-dependencies/ ./
 COPY --from=builder spring-boot-loader/ ./
 COPY --from=builder application/ ./
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
-
-EXPOSE 8080
+ENTRYPOINT java $JAVA_OPTS -cp . org.springframework.boot.loader.JarLauncher
 
