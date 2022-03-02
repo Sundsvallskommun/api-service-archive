@@ -25,6 +25,7 @@ import net.javacrumbs.jsonunit.core.internal.Options;
     classes = Application.class,
     properties = {
         "integration.formpipe-proxy.base-url=http://dummy",
+        "byggr.submission-agreement-id=SOME_AGREEMENT_ID",
         "spring.main.banner-mode=off",
         "logging.level.se.sundsvall.dept44.payload=OFF"
     }

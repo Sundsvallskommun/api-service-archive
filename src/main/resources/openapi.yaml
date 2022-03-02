@@ -25,18 +25,18 @@ paths:
               $ref: '#/components/schemas/ByggRArchiveRequest'
         required: true
       responses:
-        "200":
-          description: Successful operation
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ArchiveResponse'
         "400":
           description: Bad request
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Problem'
+        "200":
+          description: Successful operation
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ArchiveResponse'
   /archive/byggr2:
     post:
       tags:
@@ -50,29 +50,18 @@ paths:
               $ref: '#/components/schemas/ByggRArchiveRequest2'
         required: true
       responses:
-        "200":
-          description: Successful operation
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ArchiveResponse'
         "400":
           description: Bad request
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api-docs:
-    get:
-      tags:
-      - API
-      summary: OpenAPI-definition
-      operationId: api-docs
-      responses:
         "200":
-          description: OK
-      x-auth-type: None
-      x-throttling-tier: Unlimited
+          description: Successful operation
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ArchiveResponse'
 components:
   schemas:
     Attachment:
@@ -104,32 +93,6 @@ components:
           type: string
           description: Metadata XML
       description: Request för att arkivera bygglovshandlingar
-    ArchiveResponse:
-      type: object
-      properties:
-        archiveId:
-          type: string
-          description: Archive ID
-          nullable: true
-        errorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-      description: Archive response
-    ErrorDetails:
-      type: object
-      properties:
-        errorCode:
-          type: integer
-          description: Formpipe error code
-          format: int32
-        errorMessage:
-          type: string
-          description: Formpipe error message
-        serviceName:
-          type: string
-          description: Formpipe service name
-          nullable: true
-      description: Error details
-      nullable: true
     Problem:
       type: object
       properties:
@@ -157,6 +120,32 @@ components:
           format: int32
         reasonPhrase:
           type: string
+    ArchiveResponse:
+      type: object
+      properties:
+        archiveId:
+          type: string
+          description: Archive ID
+          nullable: true
+        errorDetails:
+          $ref: '#/components/schemas/ErrorDetails'
+      description: Archive response
+    ErrorDetails:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          description: Formpipe error code
+          format: int32
+        errorMessage:
+          type: string
+          description: Formpipe error message
+        serviceName:
+          type: string
+          description: Formpipe service name
+          nullable: true
+      description: Error details
+      nullable: true
     ByggRArchiveRequest2:
       required:
       - attachment
