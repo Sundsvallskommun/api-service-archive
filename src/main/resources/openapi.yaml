@@ -73,7 +73,7 @@ components:
         name:
           type: string
         extension:
-          pattern: ^\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|docx|txt|xlsx|odt|ods)$
+          pattern: ^\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|doc|docx|txt|xls|xlsx|odt|ods)$
           type: string
           example: .pdf
         file:

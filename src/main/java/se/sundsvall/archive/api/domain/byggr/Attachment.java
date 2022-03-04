@@ -17,7 +17,7 @@ public class Attachment {
     private String name;
 
     @NotBlank
-    @Pattern(regexp = "^\\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|docx|txt|xlsx|odt|ods)$", message = "extension must be valid. Must match regex: {regexp}")
+    @Pattern(regexp = "^\\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|doc|docx|txt|xls|xlsx|odt|ods)$", message = "extension must be valid. Must match regex: {regexp}")
     @Schema(example = ".pdf")
     private String extension;
 
