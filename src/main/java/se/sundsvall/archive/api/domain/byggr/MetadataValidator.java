@@ -16,7 +16,8 @@ class MetadataValidator {
         var doc = Jsoup.parse(metadataXml, Parser.xmlParser());
 
         for (Element element : Xsoup.compile("//Bilaga").evaluate(doc).getElements()) {
-            if (!element.attr("Namn").matches(WITH_SUFFIX_REGEX) || !element.attr("Lank").matches(WITH_SUFFIX_REGEX)) {
+            if (!element.attr("Namn").toLowerCase().matches(WITH_SUFFIX_REGEX) ||
+                    !element.attr("Lank").toLowerCase().matches(WITH_SUFFIX_REGEX)) {
                 return false;
             }
         }
