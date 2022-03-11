@@ -25,18 +25,18 @@ paths:
               $ref: '#/components/schemas/ByggRArchiveRequest'
         required: true
       responses:
-        "400":
-          description: Bad request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ArchiveResponse'
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Problem'
   /archive/byggr2:
     post:
       tags:
@@ -50,18 +50,31 @@ paths:
               $ref: '#/components/schemas/ByggRArchiveRequest2'
         required: true
       responses:
-        "400":
-          description: Bad request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ArchiveResponse'
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api-docs:
+    get:
+      tags:
+      - API
+      summary: OpenAPI
+      operationId: getApiDocs
+      responses:
+        "200":
+          description: OK
+          content:
+            application/yaml:
+              schema:
+                type: string
 components:
   schemas:
     Attachment:
@@ -93,33 +106,6 @@ components:
           type: string
           description: Metadata XML
       description: Request för att arkivera bygglovshandlingar
-    Problem:
-      type: object
-      properties:
-        instance:
-          type: string
-          format: uri
-        type:
-          type: string
-          format: uri
-        parameters:
-          type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
-        title:
-          type: string
-        detail:
-          type: string
-    StatusType:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        reasonPhrase:
-          type: string
     ArchiveResponse:
       type: object
       properties:
@@ -146,6 +132,33 @@ components:
           nullable: true
       description: Error details
       nullable: true
+    Problem:
+      type: object
+      properties:
+        instance:
+          type: string
+          format: uri
+        type:
+          type: string
+          format: uri
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          $ref: '#/components/schemas/StatusType'
+        detail:
+          type: string
+        title:
+          type: string
+    StatusType:
+      type: object
+      properties:
+        reasonPhrase:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
     ByggRArchiveRequest2:
       required:
       - attachment

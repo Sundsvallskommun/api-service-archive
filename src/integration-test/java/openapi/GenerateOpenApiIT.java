@@ -62,7 +62,7 @@ class GenerateOpenApiIT {
      * @return the current OpenAPI specification
      */
     private String getCurrentOpenApiSpecification() {
-        var uri = UriComponentsBuilder.fromPath("/api/{name}/v{version}/api-docs.yaml")
+        var uri = UriComponentsBuilder.fromPath("/api-docs.yaml")
             .buildAndExpand(openApiName, openApiVersion)
             .toUri();
 
