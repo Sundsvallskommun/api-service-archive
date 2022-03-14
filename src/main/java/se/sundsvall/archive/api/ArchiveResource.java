@@ -10,9 +10,7 @@ import org.zalando.problem.Problem;
 
 import se.sundsvall.archive.api.domain.ArchiveResponse;
 import se.sundsvall.archive.api.domain.byggr.ByggRArchiveRequest;
-import se.sundsvall.archive.api.domain.byggr.ByggRArchiveRequest2;
 import se.sundsvall.archive.api.domain.byggr.ByggRFormpipeProxyMapper;
-import se.sundsvall.archive.api.domain.byggr.ByggRFormpipeProxyMapper2;
 import se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,14 +27,11 @@ class ArchiveResource {
 
     private final FormpipeProxyIntegration formpipeProxyIntegration;
     private final ByggRFormpipeProxyMapper byggRFormpipeProxyMapper;
-    private final ByggRFormpipeProxyMapper2 byggRFormpipeProxyMapper2;
 
     ArchiveResource(final FormpipeProxyIntegration formpipeProxyIntegration,
-            final ByggRFormpipeProxyMapper byggRFormpipeProxyMapper,
-            final ByggRFormpipeProxyMapper2 byggRFormpipeProxyMapper2) {
+            final ByggRFormpipeProxyMapper byggRFormpipeProxyMapper) {
         this.formpipeProxyIntegration = formpipeProxyIntegration;
         this.byggRFormpipeProxyMapper = byggRFormpipeProxyMapper;
-        this.byggRFormpipeProxyMapper2 = byggRFormpipeProxyMapper2;
     }
 
     @Operation(summary = "Submit a ByggR archive request")
@@ -53,22 +48,5 @@ class ArchiveResource {
         return byggRFormpipeProxyMapper.map(
             formpipeProxyIntegration.doImport(
                 byggRFormpipeProxyMapper.map(request)));
-    }
-
-
-    @Operation(summary = "Submit a ByggR archive request with BASE64-encoded metadata")
-    @ApiResponses({
-        @ApiResponse(
-            responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = ArchiveResponse.class))
-        ),
-        @ApiResponse(
-            responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = Problem.class))
-        )
-    })
-    @PostMapping("/byggr2")
-    ArchiveResponse byggR2(@Valid @RequestBody final ByggRArchiveRequest2 request) {
-        return byggRFormpipeProxyMapper2.map(
-            formpipeProxyIntegration.doImport(
-                byggRFormpipeProxyMapper2.map(request)));
     }
 }
