@@ -10,8 +10,8 @@ import se.sundsvall.dept44.configuration.resttemplate.RestTemplateBuilder;
 @Configuration
 class FormpipeProxyIntegrationConfiguration {
 
-    private FormpipeProxyIntegrationProperties properties;
-    private Logbook logbook;
+    private final FormpipeProxyIntegrationProperties properties;
+    private final Logbook logbook;
 
     FormpipeProxyIntegrationConfiguration(final FormpipeProxyIntegrationProperties properties,
             final Logbook logbook) {
@@ -24,6 +24,8 @@ class FormpipeProxyIntegrationConfiguration {
         return new RestTemplateBuilder()
             .withBaseUrl(properties.getBaseUrl())
             .withLogbook(logbook)
+            .withConnectTimeout(properties.getConnectTimeout())
+            .withReadTimeout(properties.getReadTimeout())
             .build();
     }
 }
