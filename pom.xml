@@ -15,6 +15,10 @@
 
 	<properties>
 		<docker.image.name>ms-archive</docker.image.name>
+		<exposed.app.port>8080</exposed.app.port>
+		<published.container.port.sandbox>9051</published.container.port.sandbox>
+		<published.container.port.test>9050</published.container.port.test>
+		<published.container.port.production>9050</published.container.port.production>
 	</properties>
 
 	<dependencies>
