@@ -3,6 +3,8 @@ package se.sundsvall.archive.api.domain.byggr;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,18 +22,19 @@ class ByggRFormpipeProxyMapperTest {
     private static final String SUBMISSION_AGREEMENT_ID = "someSubmissionAgreementId";
 
     @Mock
-    private MetadataValidator mockMetadataValidator;
+    private MetadataUtil mockMetadataUtil;
 
     private ByggRFormpipeProxyMapper mapper;
 
     @BeforeEach
     void setUp() {
-        mapper = new ByggRFormpipeProxyMapper(SUBMISSION_AGREEMENT_ID, mockMetadataValidator);
+        mapper = new ByggRFormpipeProxyMapper(SUBMISSION_AGREEMENT_ID, mockMetadataUtil);
     }
 
     @Test
     void test_mapRequest() {
-        when(mockMetadataValidator.isValidMetadata(any(String.class))).thenReturn(true);
+        when(mockMetadataUtil.isValidMetadata(any(String.class))).thenReturn(true);
+        when(mockMetadataUtil.getConfidentialityLevel(any(String.class))).thenReturn(1);
 
         var attachment = new Attachment();
         attachment.setName("someName");
@@ -46,17 +49,20 @@ class ByggRFormpipeProxyMapperTest {
         assertThat(importRequest.getSubmissionAgreementId()).isEqualTo(SUBMISSION_AGREEMENT_ID);
         assertThat(importRequest.getUuid()).isNotBlank();
         assertThat(importRequest.getMetadataXml()).isEqualTo(mapper.toBase64("someMetadata"));
-        assertThat(importRequest.getConfidentialityLevel()).isEqualTo(0);
+        assertThat(importRequest.getConfidentialityLevel()).isOne();
         assertThat(importRequest.getPreservationObject()).satisfies(preservationObject -> {
             assertThat(preservationObject.getFileName()).isEqualTo("someName");
             assertThat(preservationObject.getFileExtension()).isEqualTo("someExtension");
             assertThat(preservationObject.getData()).isEqualTo("someFile");
         });
+
+        verify(mockMetadataUtil, times(1)).isValidMetadata(any(String.class));
+        verify(mockMetadataUtil, times(1)).getConfidentialityLevel(any(String.class));
     }
 
     @Test
     void test_mapRequest_withInvalidMetadata() {
-        when(mockMetadataValidator.isValidMetadata(any(String.class))).thenReturn(false);
+        when(mockMetadataUtil.isValidMetadata(any(String.class))).thenReturn(false);
 
         var attachment = new Attachment();
         attachment.setName("someName");
