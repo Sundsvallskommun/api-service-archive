@@ -3,6 +3,11 @@ package se.sundsvall.archive.api.domain.byggr;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
@@ -16,19 +21,35 @@ import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 @Component
 public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiveRequest, ArchiveResponse> {
 
+    private static final String HANDLINGSTYP_XPATH = "//ArkivobjektHandling/Handlingstyp/text()";
+
+    private final DocumentBuilder documentBuilder;
+    private final XPath xPath;
+
     private final String submissionAgreementId;
-    private final MetadataValidator metadataValidator;
+    private final MetadataUtil metadataUtil;
 
     public ByggRFormpipeProxyMapper(
             @Value("${byggr.submission-agreement-id}") final String submissionAgreementId,
-            final MetadataValidator metadataValidator) {
+            final MetadataUtil metadataUtil) {
         this.submissionAgreementId = submissionAgreementId;
-        this.metadataValidator = metadataValidator;
+        this.metadataUtil = metadataUtil;
+
+        try {
+            var documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
+            var xPathFactory = XPathFactory.newInstance();
+            xPath = xPathFactory.newXPath();
+        } catch (Exception e) {
+            // This should never ever happen, but still...
+            throw new RuntimeException("Unable to create document builder", e);
+        }
     }
 
     @Override
-    public ImportRequest map(final ByggRArchiveRequest byggRArchiveRequest) {
-        if (!metadataValidator.isValidMetadata(byggRArchiveRequest.getMetadata())) {
+    public ImportRequest map(final ByggRArchiveRequest request) {
+        if (!metadataUtil.isValidMetadata(request.getMetadata())) {
             throw Problem.builder()
                 .withStatus(Status.BAD_REQUEST)
                 .withTitle("Invalid metadata")
@@ -39,14 +60,14 @@ public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiv
         return ImportRequest.builder()
             .withSubmissionAgreementId(submissionAgreementId)
             .withUuid(UUID.randomUUID().toString())
-            .withMetadataXml(toBase64(byggRArchiveRequest.getMetadata()))
+            .withMetadataXml(toBase64(request.getMetadata()))
             //.withPersonalDataFlag(false)
-            .withConfidentialityLevel(0)
+            .withConfidentialityLevel(metadataUtil.getConfidentialityLevel(request.getMetadata()))
             //.withConfidentialityDegradationDate(LocalDateTime.now().plusYears(1))
             .withPreservationObject(ImportRequest.PreservationObject.builder()
-                .withFileExtension(byggRArchiveRequest.getAttachment().getExtension())
-                .withFileName(byggRArchiveRequest.getAttachment().getName())
-                .withData(byggRArchiveRequest.getAttachment().getFile())
+                .withFileExtension(request.getAttachment().getExtension())
+                .withFileName(request.getAttachment().getName())
+                .withData(request.getAttachment().getFile())
                 .build())
             .build();
     }
