@@ -1,0 +1,18 @@
+{
+  "id" : "3c813def-7f31-4875-b7ee-0a3c0b1bddd3",
+  "name" : "formpipeproxy_import",
+  "request" : {
+    "url" : "/api/import",
+    "method" : "POST"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "test1_successful/responses/formpipeproxy.response.json",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8"
+    }
+  },
+  "uuid" : "3c813def-7f31-4875-b7ee-0a3c0b1bddd3",
+  "persistent" : true,
+  "insertionIndex" : 1
+}
