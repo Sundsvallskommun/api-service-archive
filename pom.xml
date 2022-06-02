@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>se.sundsvall</groupId>
 	<artifactId>api-service-archive</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>api-service-archive</name>
 
 	<properties>
