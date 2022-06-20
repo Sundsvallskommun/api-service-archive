@@ -35,6 +35,8 @@ class ByggRFormpipeProxyMapperTest {
     void test_mapRequest() {
         when(mockMetadataUtil.isValidMetadata(any(String.class))).thenReturn(true);
         when(mockMetadataUtil.getConfidentialityLevel(any(String.class))).thenReturn(1);
+        when(mockMetadataUtil.replaceAttachmentNameAndLink(any(String.class), any(String.class), any(String.class)))
+            .thenReturn("someMetadata");
 
         var attachment = new Attachment();
         attachment.setName("someName");
@@ -51,7 +53,7 @@ class ByggRFormpipeProxyMapperTest {
         assertThat(importRequest.getMetadataXml()).isEqualTo(mapper.toBase64("someMetadata"));
         assertThat(importRequest.getConfidentialityLevel()).isOne();
         assertThat(importRequest.getPreservationObject()).satisfies(preservationObject -> {
-            assertThat(preservationObject.getFileName()).isEqualTo("someName");
+            assertThat(preservationObject.getFileName()).isNotBlank();
             assertThat(preservationObject.getFileExtension()).isEqualTo("someExtension");
             assertThat(preservationObject.getData()).isEqualTo("someFile");
         });

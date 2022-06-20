@@ -48,6 +48,26 @@ class MetadataUtil {
             .anyMatch("D"::equalsIgnoreCase) ? 1 : 0;
     }
 
+    String replaceAttachmentNameAndLink(final String metadataXml, final String uuid, final String extension) {
+        var doc = Jsoup.parse(metadataXml, Parser.xmlParser());
+
+        var matches = evaluateXPath(doc, "//ArkivobjektHandling/Bilaga");
+        if (matches.size() != 1) {
+            throw Problem.builder()
+                .withStatus(Status.BAD_REQUEST)
+                .withTitle("Invalid metadata")
+                .withDetail("Found " + matches.size() + " 'Bilaga' node(s), when 1 was expected")
+                .build();
+        }
+
+        var element = matches.first();
+        if (element != null) {
+            element.attr("Namn", uuid + extension).attr("Bilaga", uuid + extension);
+        }
+
+        return doc.toString();
+    }
+
     Elements evaluateXPath(final Element element, final String expression) {
         return Xsoup.compile(expression).evaluate(element).getElements();
     }
