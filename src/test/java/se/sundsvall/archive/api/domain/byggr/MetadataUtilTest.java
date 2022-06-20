@@ -45,7 +45,21 @@ class MetadataUtilTest {
     @Test
     void test_getConfidentialityLevel_invalid_multiple_confidentiality_levels(@Load("/metadata/metadata.invalid.multiple-confidentialitylevels.xml") final String metadataXml) {
         assertThatExceptionOfType(ThrowableProblem.class)
-                .isThrownBy(() -> util.getConfidentialityLevel(metadataXml))
-                .withMessage("Invalid metadata: Unable to extract 'Handlingstyp' from metadata. Found 2 matching node(s)");
+            .isThrownBy(() -> util.getConfidentialityLevel(metadataXml))
+            .withMessage("Invalid metadata: Unable to extract 'Handlingstyp' from metadata. Found 2 matching node(s)");
+    }
+
+    @Test
+    void test_replaceAttachmentNameAndLink(@Load("/metadata/metadata.valid.xml") final String metadataXml) {
+        var modifiedMetadataXml = util.replaceAttachmentNameAndLink(metadataXml, "someUuid", ".xyz");
+
+        assertThat(modifiedMetadataXml).contains("someUuid.xyz");
+    }
+
+    @Test
+    void test_replaceAttachmentNameAndLink_invalid_multiple_attachments(@Load("/metadata/metadata.invalid.multiple-attachments.xml") final String metadataXml) {
+        assertThatExceptionOfType(ThrowableProblem.class)
+            .isThrownBy(() -> util.replaceAttachmentNameAndLink(metadataXml, "someUuid", ".xyz"))
+            .withMessage("Invalid metadata: Found 2 'Bilaga' node(s), when 1 was expected");
     }
 }

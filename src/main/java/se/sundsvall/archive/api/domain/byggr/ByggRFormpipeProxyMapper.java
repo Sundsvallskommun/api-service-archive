@@ -57,16 +57,19 @@ public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiv
                 .build();
         }
 
+        var uuid = UUID.randomUUID().toString();
+
         return ImportRequest.builder()
             .withSubmissionAgreementId(submissionAgreementId)
-            .withUuid(UUID.randomUUID().toString())
-            .withMetadataXml(toBase64(request.getMetadata()))
+            .withUuid(uuid)
+            .withMetadataXml(toBase64(metadataUtil.replaceAttachmentNameAndLink(
+                request.getMetadata(), uuid, request.getAttachment().getExtension())))
             //.withPersonalDataFlag(false)
             .withConfidentialityLevel(metadataUtil.getConfidentialityLevel(request.getMetadata()))
             //.withConfidentialityDegradationDate(LocalDateTime.now().plusYears(1))
             .withPreservationObject(ImportRequest.PreservationObject.builder()
                 .withFileExtension(request.getAttachment().getExtension())
-                .withFileName(request.getAttachment().getName())
+                .withFileName(uuid)
                 .withData(request.getAttachment().getFile())
                 .build())
             .build();
