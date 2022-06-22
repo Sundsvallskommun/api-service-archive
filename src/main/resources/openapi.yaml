@@ -9,8 +9,6 @@ info:
 servers:
 - url: http://localhost:8080
   description: Generated server url
-tags:
-- name: Archive resources
 paths:
   /archive/byggr:
     post:
@@ -123,10 +121,10 @@ components:
           type: object
           additionalProperties:
             type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
         title:
           type: string
+        status:
+          $ref: '#/components/schemas/StatusType'
         detail:
           type: string
     StatusType:
