@@ -20,7 +20,9 @@
 		<sandbox.db>false</sandbox.db>
 
 		<docker.image.name>ms-archive</docker.image.name>
-		
+
+		<app.jvm.xmx.mb>512</app.jvm.xmx.mb>
+
 		<published.container.port.sandbox>9051</published.container.port.sandbox>
 		<published.container.port.test>9050</published.container.port.test>
 		<published.container.port.production>9050</published.container.port.production>
