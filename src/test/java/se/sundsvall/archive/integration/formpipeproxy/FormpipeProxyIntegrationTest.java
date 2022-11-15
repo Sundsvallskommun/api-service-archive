@@ -3,7 +3,6 @@ package se.sundsvall.archive.integration.formpipeproxy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,12 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.client.RestTemplate;
 import org.zalando.problem.Status;
 import org.zalando.problem.ThrowableProblem;
 
@@ -28,19 +24,18 @@ import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 class FormpipeProxyIntegrationTest {
 
     @Mock
-    private RestTemplate mockRestTemplate;
+    private FormpipeProxyClient mockClient;
 
     private FormpipeProxyIntegration formpipeProxyIntegration;
 
     @BeforeEach
     void setUp() {
-        formpipeProxyIntegration = new FormpipeProxyIntegration(mockRestTemplate);
+        formpipeProxyIntegration = new FormpipeProxyIntegration(mockClient);
     }
 
     @Test
     void test_doImport_400_BAD_REQUEST() {
-        when(mockRestTemplate.exchange(
-                eq("/api/import"), eq(HttpMethod.POST), any(HttpEntity.class), eq(ImportResponse.class)))
+        when(mockClient.postImport(any(ImportRequest.class)))
             .thenReturn(ResponseEntity.badRequest().build());
 
         assertThatExceptionOfType(ThrowableProblem.class)
@@ -58,8 +53,7 @@ class FormpipeProxyIntegrationTest {
 
     @Test
     void test_doImport_500_INTERNAL_SERVER_ERROR() {
-        when(mockRestTemplate.exchange(
-                eq("/api/import"), eq(HttpMethod.POST), any(HttpEntity.class), eq(ImportResponse.class)))
+        when(mockClient.postImport(any(ImportRequest.class)))
             .thenReturn(ResponseEntity.internalServerError().build());
 
         assertThatExceptionOfType(ThrowableProblem.class)
@@ -74,8 +68,7 @@ class FormpipeProxyIntegrationTest {
 
     @Test
     void test_doImport_unknown_error() {
-        when(mockRestTemplate.exchange(
-                eq("/api/import"), eq(HttpMethod.POST), any(HttpEntity.class), eq(ImportResponse.class)))
+        when(mockClient.postImport(any(ImportRequest.class)))
             .thenReturn(ResponseEntity.status(HttpStatus.FOUND).build());
 
         assertThatExceptionOfType(ThrowableProblem.class)
@@ -90,8 +83,7 @@ class FormpipeProxyIntegrationTest {
 
     @Test
     void test_doImport_200_OK() {
-        when(mockRestTemplate.exchange(
-                eq("/api/import"), eq(HttpMethod.POST), any(HttpEntity.class), eq(ImportResponse.class)))
+        when(mockClient.postImport(any(ImportRequest.class)))
             .thenReturn(ResponseEntity.ok(new ImportResponse()));
 
         var response = formpipeProxyIntegration.doImport(new ImportRequest());
