@@ -14,7 +14,7 @@
 	<name>api-service-archive</name>
 
 	<properties>
-		<jsoup.version>1.15.1</jsoup.version>
+		<jsoup.version>1.15.3</jsoup.version>
 		<xsoup.version>0.3.2</xsoup.version>
 
 		<sandbox.db>false</sandbox.db>
