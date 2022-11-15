@@ -1,31 +1,37 @@
 package se.sundsvall.archive.integration.formpipeproxy;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+import org.springframework.cloud.openfeign.FeignBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
-import org.zalando.logbook.Logbook;
+import org.springframework.context.annotation.Import;
 
-import se.sundsvall.dept44.configuration.resttemplate.RestTemplateBuilder;
+import se.sundsvall.dept44.configuration.feign.FeignConfiguration;
+import se.sundsvall.dept44.configuration.feign.FeignMultiCustomizer;
 
-@Configuration
+import feign.Request.Options;
+
+@Import(FeignConfiguration.class)
 class FormpipeProxyIntegrationConfiguration {
 
     private final FormpipeProxyIntegrationProperties properties;
-    private final Logbook logbook;
 
-    FormpipeProxyIntegrationConfiguration(final FormpipeProxyIntegrationProperties properties,
-            final Logbook logbook) {
+    FormpipeProxyIntegrationConfiguration(final FormpipeProxyIntegrationProperties properties) {
         this.properties = properties;
-        this.logbook = logbook;
     }
 
-    @Bean("integration.formpipe-proxy.resttemplate")
-    RestTemplate restTemplate() {
-        return new RestTemplateBuilder()
-            .withBaseUrl(properties.getBaseUrl())
-            .withLogbook(logbook)
-            .withConnectTimeout(properties.getConnectTimeout())
-            .withReadTimeout(properties.getReadTimeout())
-            .build();
+    @Bean
+    FeignBuilderCustomizer feignCustomizer() {
+        return FeignMultiCustomizer.create()
+            .withRequestOptions(requestOptions())
+            .composeCustomizersToOne();
+    }
+
+    private Options requestOptions() {
+        return new Options(
+            properties.getConnectTimeout().toMillis(), MILLISECONDS,
+            properties.getReadTimeout().toMillis(), MILLISECONDS,
+            true
+        );
     }
 }
