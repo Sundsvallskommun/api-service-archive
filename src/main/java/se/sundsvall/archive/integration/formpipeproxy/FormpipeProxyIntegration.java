@@ -14,6 +14,8 @@ public class FormpipeProxyIntegration {
 
     static final String INTEGRATION_NAME = "FormpipeProxy";
 
+    static final String CIRCUIT_BREAKER_NAME = "formpipe-proxy";
+
     private final FormpipeProxyClient client;
 
     public FormpipeProxyIntegration(final FormpipeProxyClient client) {

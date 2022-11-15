@@ -3,8 +3,7 @@ package openapi;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,9 +29,9 @@ import net.javacrumbs.jsonunit.core.internal.Options;
         "logging.level.se.sundsvall.dept44.payload=OFF"
     }
 )
-class GenerateOpenApiIT {
+class OpenApiSpecificationIT {
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper(new YAMLFactory());
+    private static final YAMLMapper YAML_MAPPER = new YAMLMapper();
 
     @Value("${openapi.name}")
     private String openApiName;
@@ -77,7 +76,7 @@ class GenerateOpenApiIT {
      */
     private String toJson(final String yaml) {
         try {
-            return OBJECT_MAPPER.readTree(yaml).toString();
+            return YAML_MAPPER.readTree(yaml).toString();
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Unable to convert YAML to JSON", e);
         }

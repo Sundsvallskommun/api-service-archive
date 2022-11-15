@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-archive
+
+# OpenAPI
+openapi:
+  name: archive
+  title: Archive
+  version: '@project.version@'
+
+# Circuit breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      formpipe-proxy:
+        ignoreExceptions: se.sundsvall.dept44.exception.ClientProblem
