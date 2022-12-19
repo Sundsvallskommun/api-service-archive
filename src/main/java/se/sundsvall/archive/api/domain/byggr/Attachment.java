@@ -2,6 +2,7 @@ package se.sundsvall.archive.api.domain.byggr;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import se.sundsvall.archive.api.domain.validation.ValidBase64String;
 
@@ -21,7 +22,8 @@ public class Attachment {
     @Schema(example = ".pdf")
     private String extension;
 
+    @Size(max = 100000000)
     @ValidBase64String
-    @Schema(description = "BASE64-encoded file contents", example = "YXBhCg==")
+    @Schema(description = "BASE64-encoded file contents (Max 100Mb)", example = "YXBhCg==", maxLength = 100000000)
     private String file;
 }
