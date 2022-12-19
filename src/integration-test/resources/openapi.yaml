@@ -5,7 +5,7 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: '1.0'
+  version: "1.0"
 servers:
 - url: http://localhost:8080
   description: Generated server url
@@ -23,18 +23,18 @@ paths:
               $ref: '#/components/schemas/ByggRArchiveRequest'
         required: true
       responses:
-        "400":
-          description: Bad request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ArchiveResponse'
+        "400":
+          description: Bad request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api-docs:
     get:
       tags:
@@ -66,8 +66,10 @@ components:
           type: string
           example: .pdf
         file:
+          maxLength: 100000000
+          minLength: 0
           type: string
-          description: BASE64-encoded file contents
+          description: BASE64-encoded file contents (Max 100Mb)
           example: YXBhCg==
       description: Bilaga
     ByggRArchiveRequest:
@@ -82,33 +84,6 @@ components:
           type: string
           description: Metadata XML
       description: Request för att arkivera bygglovshandlingar
-    Problem:
-      type: object
-      properties:
-        instance:
-          type: string
-          format: uri
-        type:
-          type: string
-          format: uri
-        parameters:
-          type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
-        title:
-          type: string
-        detail:
-          type: string
-    StatusType:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        reasonPhrase:
-          type: string
     ArchiveResponse:
       type: object
       properties:
@@ -135,4 +110,31 @@ components:
           nullable: true
       description: Error details
       nullable: true
+    Problem:
+      type: object
+      properties:
+        instance:
+          type: string
+          format: uri
+        type:
+          type: string
+          format: uri
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          $ref: '#/components/schemas/StatusType'
+        detail:
+          type: string
+        title:
+          type: string
+    StatusType:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        reasonPhrase:
+          type: string
   securitySchemes: {}
