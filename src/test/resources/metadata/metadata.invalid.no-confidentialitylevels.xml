@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Leveransobjekt xmlns="http://xml.ra.se/e-arkiv/FGS-ERMS">
+    <ArkivbildarStruktur>
+        <Arkivbildare>
+            <Namn>Sundsvalls kommun</Namn>
+            <VerksamhetstidFran>1974</VerksamhetstidFran>
+            <Arkivbildare>
+                <Namn>Bygg- och miljönämnden</Namn>
+                <VerksamhetstidFran>1974</VerksamhetstidFran>
+            </Arkivbildare>
+        </Arkivbildare>
+    </ArkivbildarStruktur>
+    <ArkivobjektListaArenden>
+        <ArkivobjektArende>
+            <ArkivobjektID>BYGG 2022-000046</ArkivobjektID>
+            <ArendeTyp>BL</ArendeTyp>
+            <Avslutat>2022-01-20</Avslutat>
+            <Klass>F2 Bygglov</Klass>
+            <Skapad>2022-01-20</Skapad>
+            <StatusArande>Stängt</StatusArande>
+            <Arendemening>Bygglov för nybyggnad av enbostadshus, parkering och parkering</Arendemening>
+            <Fastighet>
+                <Fastighetsbeteckning>SUNDSVALL TEST 1</Fastighetsbeteckning>
+                <Objektidentitet>909a6a80-d59c-90ec-e040-ed8f66444c3f</Objektidentitet>
+                <Trakt>TEST</Trakt>
+            </Fastighet>
+            <ArkivobjektListaHandlingar>
+                <ArkivobjektHandling>
+                    <ArkivobjektID>586545</ArkivobjektID>
+                    <!--<Handlingstyp>D</Handlingstyp>-->
+                    <Rubrik>Nybyggnadskarta</Rubrik>
+                    <Skapad>2022-01-20</Skapad>
+                    <Bilaga Namn="Namn på dokumentet 10.pdf" Lank="Bilagor\Namn på dokumentet 10.pdf" />
+                </ArkivobjektHandling>
+            </ArkivobjektListaHandlingar>
+        </ArkivobjektArende>
+    </ArkivobjektListaArenden>
+</Leveransobjekt>

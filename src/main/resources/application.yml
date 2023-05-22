@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: api-archive
+
+# OpenAPI
+openapi:
+  name: archive
+  title: Archive
+  version: '@project.version@'
+
