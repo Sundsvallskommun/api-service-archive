@@ -1,14 +1,14 @@
 package se.sundsvall.archive.api.domain.byggr;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.util.Base64Utils.encodeToString;
 
-import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.function.Consumer;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class AttachmentTest {
 
         assertThat(attachment.getName()).isEqualTo("someName");
         assertThat(attachment.getExtension()).isEqualTo(".bmp");
-        assertThat(attachment.getFile()).isEqualTo(encodeToString("someFileContents".getBytes(StandardCharsets.UTF_8)));
+        assertThat(attachment.getFile()).isEqualTo(encodeToString("someFileContents"));
     }
 
     @Test
@@ -68,12 +68,16 @@ class AttachmentTest {
         var attachment = new Attachment();
         attachment.setName("someName");
         attachment.setExtension(".bmp");
-        attachment.setFile(encodeToString("someFileContents".getBytes(StandardCharsets.UTF_8)));
+        attachment.setFile(encodeToString("someFileContents"));
 
         if (modifier != null) {
             modifier.accept(attachment);
         }
 
         return attachment;
+    }
+
+    private String encodeToString(final String s) {
+        return Base64.getEncoder().encodeToString(s.getBytes(UTF_8));
     }
 }

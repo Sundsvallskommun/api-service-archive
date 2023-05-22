@@ -1,6 +1,7 @@
 package se.sundsvall.archive.integration.formpipeproxy;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
@@ -25,7 +26,9 @@ public class FormpipeProxyIntegration {
     public ImportResponse doImport(final ImportRequest request) {
         var resp = client.postImport(request);
 
-        return switch (resp.getStatusCode().series()) {
+        var httpStatus = HttpStatus.resolve(resp.getStatusCode().value());
+
+        return switch (httpStatus.series()) {
             case SUCCESSFUL -> resp.getBody();
             case CLIENT_ERROR -> throw Problem.builder()
                 .withTitle("Client error")
