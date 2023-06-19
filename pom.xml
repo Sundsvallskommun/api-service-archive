@@ -15,7 +15,7 @@
 
 	<properties>
 		<jsoup.version>1.16.1</jsoup.version>
-		<xsoup.version>0.3.6</xsoup.version>
+		<xsoup.version>0.3.7</xsoup.version>
 
 		<sandbox.db>false</sandbox.db>
 
