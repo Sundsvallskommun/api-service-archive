@@ -5,20 +5,21 @@ import java.util.Base64;
 
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
+
 /**
  * Formpipe Proxy Mapper, defining the contract for mapping different archive requests/responses
  * to/from Formpipe requests/responses.
  *
- * @param <REQUEST> the archive request type
- * @param <RESPONSE> the archive response type
+ * @param <I> the archive request type (Input)
+ * @param <O> the archive response type (Output)
  */
-public interface FormpipeProxyMapper<REQUEST, RESPONSE> {
+public interface FormpipeProxyMapper<I, O> {
 
-    ImportRequest map(REQUEST request);
+	ImportRequest map(I request);
 
-    RESPONSE map(ImportResponse response);
+	O map(ImportResponse response);
 
-    default String toBase64(final String s) {
-        return Base64.getEncoder().encodeToString(s.getBytes(StandardCharsets.UTF_8));
-    }
+	default String toBase64(final String s) {
+		return Base64.getEncoder().encodeToString(s.getBytes(StandardCharsets.UTF_8));
+	}
 }
