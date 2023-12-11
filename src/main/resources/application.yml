@@ -4,7 +4,7 @@ spring:
 
 # OpenAPI
 openapi:
-  name: archive
-  title: Archive
+  name: ${spring.application.name}
+  title: ${spring.application.name}
   version: '@project.version@'
 

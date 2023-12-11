@@ -1,0 +1,8 @@
+byggr:
+    submission-agreement-id: BSAI
+integration:
+    formpipe-proxy:
+        base-url: http://dummy
+spring:
+    main:
+        banner-mode: 'off'
