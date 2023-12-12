@@ -1,0 +1,15 @@
+byggr:
+    submission-agreement-id: SOME_AGREEMENT_ID
+integration:
+    formpipe-proxy:
+        base-url: http://localhost:${wiremock.server.port}
+openapi:
+    name: archive
+    title: Archive
+    version: 0.1
+spring:
+    main:
+        banner-mode: 'off'
+wiremock:
+    server:
+        httpsPort: -1
