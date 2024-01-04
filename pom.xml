@@ -12,21 +12,14 @@
 	<artifactId>api-service-archive</artifactId>
 	<version>1.0</version>
 	<name>api-service-archive</name>
-
 	<properties>
 		<jsoup.version>1.17.2</jsoup.version>
 		<xsoup.version>0.3.7</xsoup.version>
-
-		 
-
 		<docker.image.name>ms-archive</docker.image.name>
-
 		<app.jvm.xmx.mb>1024</app.jvm.xmx.mb>
-
 		<published.container.port.test>9050</published.container.port.test>
 		<published.container.port.production>9050</published.container.port.production>
 	</properties>
-
 	<dependencies>
 		<!-- Test -->
 		<dependency>
@@ -34,7 +27,6 @@
 			<artifactId>dept44-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- Framework -->
 		<dependency>
 			<groupId>se.sundsvall.dept44</groupId>
@@ -44,7 +36,6 @@
 			<groupId>se.sundsvall.dept44</groupId>
 			<artifactId>dept44-common-validators</artifactId>
 		</dependency>
-
 		<!-- Other -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -62,7 +53,6 @@
 			<version>${xsoup.version}</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
