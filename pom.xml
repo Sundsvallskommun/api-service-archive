@@ -15,10 +15,7 @@
 	<properties>
 		<jsoup.version>1.17.2</jsoup.version>
 		<xsoup.version>0.3.7</xsoup.version>
-		<docker.image.name>ms-archive</docker.image.name>
 		<app.jvm.xmx.mb>1024</app.jvm.xmx.mb>
-		<published.container.port.test>9050</published.container.port.test>
-		<published.container.port.production>9050</published.container.port.production>
 	</properties>
 	<dependencies>
 		<!-- Test -->
