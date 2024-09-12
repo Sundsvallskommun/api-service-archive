@@ -10,12 +10,11 @@
 	</parent>
 	<groupId>se.sundsvall</groupId>
 	<artifactId>api-service-archive</artifactId>
-	<version>1.0</version>
+	<version>2.0</version>
 	<name>api-service-archive</name>
 	<properties>
 		<jsoup.version>1.18.1</jsoup.version>
 		<xsoup.version>0.3.7</xsoup.version>
-		<app.jvm.xmx.mb>1024</app.jvm.xmx.mb>
 	</properties>
 	<dependencies>
 		<!-- Test -->
@@ -50,34 +49,5 @@
 			<version>${xsoup.version}</version>
 		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot.version}</version>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco-maven-plugin.version}</version>
-				<configuration>
-					<excludes>
-						<exclude>**/se/sundsvall/archive/Application*</exclude>
-						<exclude>**/se/sundsvall/archive/integration/formpipeproxy/FormpipeProxyIntegrationConfiguration*</exclude>
-						<exclude>**/se/sundsvall/archive/integration/formpipeproxy/FormpipeProxyIntegrationProperties*</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
 

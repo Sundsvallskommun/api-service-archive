@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test;
 
 class ByggRArchiveRequestTest {
 
-    @Test
-    void testGettersAndSetters() {
-        var request = new ByggRArchiveRequest();
-        request.setAttachment(new Attachment());
-        request.setMetadata("someMetadata");
+	@Test
+	void testGettersAndSetters() {
+		final var request = ByggRArchiveRequest.builder()
+			.withAttachment(new Attachment())
+			.withMetadata("someMetadata")
+			.build();
 
-        assertThat(request.getAttachment()).isNotNull();
-        assertThat(request.getMetadata()).isEqualTo("someMetadata");
-    }
+		assertThat(request.getAttachment()).isNotNull();
+		assertThat(request.getMetadata()).isEqualTo("someMetadata");
+	}
 }

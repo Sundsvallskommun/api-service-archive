@@ -12,8 +12,7 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "integration.formpipe-proxy")
 class FormpipeProxyIntegrationProperties {
 
-    private String baseUrl;
-
-    private Duration connectTimeout = Duration.ofSeconds(10);
-    private Duration readTimeout = Duration.ofSeconds(30);
+	private String baseUrl;
+	private Duration connectTimeout = Duration.ofSeconds(10);
+	private Duration readTimeout = Duration.ofSeconds(30);
 }

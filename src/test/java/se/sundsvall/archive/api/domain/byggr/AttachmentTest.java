@@ -23,7 +23,7 @@ class AttachmentTest {
 	}
 
 	@Test
-	void testGettersAndSetters() {
+	void gettersAndSetters() {
 		final var attachment = createAttachment();
 
 		assertThat(attachment.getName()).isEqualTo("someName");
@@ -32,7 +32,7 @@ class AttachmentTest {
 	}
 
 	@Test
-	void testValidation_ok() {
+	void validationOk() {
 		final var attachment = createAttachment();
 		final var constraintViolations = validator.validate(attachment);
 
@@ -40,7 +40,7 @@ class AttachmentTest {
 	}
 
 	@Test
-	void testValidation_withNameNull() {
+	void validationWithNameNull() {
 		final var attachment = createAttachment(a -> a.setName(null));
 		final var constraintViolations = List.copyOf(validator.validate(attachment));
 
@@ -50,7 +50,7 @@ class AttachmentTest {
 	}
 
 	@Test
-	void testValidation_withNameBlank() {
+	void validationWithNameBlank() {
 		final var attachment = createAttachment(a -> a.setName(""));
 		final var constraintViolations = List.copyOf(validator.validate(attachment));
 
@@ -64,10 +64,11 @@ class AttachmentTest {
 	}
 
 	private Attachment createAttachment(final Consumer<Attachment> modifier) {
-		final var attachment = new Attachment();
-		attachment.setName("someName");
-		attachment.setExtension(".bmp");
-		attachment.setFile(encodeToString("someFileContents"));
+		final var attachment = Attachment.builder()
+			.withName("someName")
+			.withExtension(".bmp")
+			.withFile(encodeToString("someFileContents"))
+			.build();
 
 		if (modifier != null) {
 			modifier.accept(attachment);
