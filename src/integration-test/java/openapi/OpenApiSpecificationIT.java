@@ -2,6 +2,7 @@ package openapi;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
+import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.io.Resource;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -33,6 +33,7 @@ class OpenApiSpecificationIT {
 
 	@Value("${openapi.name}")
 	private String openApiName;
+
 	@Value("${openapi.version}")
 	private String openApiVersion;
 
@@ -44,8 +45,8 @@ class OpenApiSpecificationIT {
 
 	@Test
 	void compareOpenApiSpecifications() {
-		final String existingOpenApiSpecification = ResourceUtils.asString(openApiResource);
-		final String currentOpenApiSpecification = getCurrentOpenApiSpecification();
+		final var existingOpenApiSpecification = ResourceUtils.asString(openApiResource);
+		final var currentOpenApiSpecification = getCurrentOpenApiSpecification();
 
 		assertThatJson(toJson(existingOpenApiSpecification))
 			.withOptions(IGNORING_ARRAY_ORDER)
@@ -59,7 +60,7 @@ class OpenApiSpecificationIT {
 	 * @return the current OpenAPI specification
 	 */
 	private String getCurrentOpenApiSpecification() {
-		final var uri = UriComponentsBuilder.fromPath("/api-docs.yaml")
+		final var uri = fromPath("/api-docs.yaml")
 			.buildAndExpand(openApiName, openApiVersion)
 			.toUri();
 

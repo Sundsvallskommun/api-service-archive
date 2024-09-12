@@ -36,7 +36,7 @@ class FormpipeProxyIntegrationTest {
 	}
 
 	@Test
-	void test_doImport_400_BAD_REQUEST() {
+	void doImport400BadRequest() {
 
 		final var request = new ImportRequest();
 
@@ -56,7 +56,7 @@ class FormpipeProxyIntegrationTest {
 	}
 
 	@Test
-	void test_doImport_500_INTERNAL_SERVER_ERROR() {
+	void doImport500InternalServerError() {
 
 		final var request = new ImportRequest();
 
@@ -73,7 +73,7 @@ class FormpipeProxyIntegrationTest {
 	}
 
 	@Test
-	void test_doImport_unknown_error() {
+	void doImportUnknownError() {
 
 		final var request = new ImportRequest();
 
@@ -90,12 +90,12 @@ class FormpipeProxyIntegrationTest {
 	}
 
 	@Test
-    void test_doImport_200_OK() {
-        when(mockClient.postImport(any(ImportRequest.class)))
-            .thenReturn(ResponseEntity.ok(new ImportResponse()));
+	void doImport200Ok() {
+		when(mockClient.postImport(any(ImportRequest.class)))
+			.thenReturn(ResponseEntity.ok(new ImportResponse()));
 
-        final var response = formpipeProxyIntegration.doImport(new ImportRequest());
+		final var response = formpipeProxyIntegration.doImport(new ImportRequest());
 
-        assertThat(response).isNotNull();
-    }
+		assertThat(response).isNotNull();
+	}
 }
