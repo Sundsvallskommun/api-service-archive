@@ -53,7 +53,7 @@ Access the API documentation via Swagger UI:
 
 - **Swagger UI:** [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
 
-Alternatively, refer to the `openapi.yml` file located in the project's root directory for the OpenAPI specification.
+Alternatively, refer to the `openapi.yml` file located in `src/integration-test/resources` for the OpenAPI specification.
 
 ## Usage
 
@@ -64,7 +64,7 @@ Refer to the [API Documentation](#api-documentation) for detailed information on
 ### Example Request
 
 ```bash
-curl -X GET http://localhost:8080/api/resource
+curl -X POST http://localhost:8080/api/{municipalityId}/archive/byggr
 ```
 
 ## Configuration
