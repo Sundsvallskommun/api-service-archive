@@ -16,26 +16,26 @@ import lombok.Setter;
 @Schema(description = "Archive response")
 public class ArchiveResponse {
 
-    @Schema(description = "Archive ID", nullable = true)
-    private String archiveId;
+	@Schema(description = "Archive ID", nullable = true)
+	private String archiveId;
 
-    @Schema(description = "Error details", nullable = true)
-    private ErrorDetails errorDetails;
+	@Schema(description = "Error details", nullable = true)
+	private ErrorDetails errorDetails;
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    @Builder(setterPrefix = "with")
-    public static class ErrorDetails {
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	@AllArgsConstructor(access = AccessLevel.PRIVATE)
+	@Builder(setterPrefix = "with")
+	public static class ErrorDetails {
 
-        @Schema(description = "Formpipe error code")
-        private Integer errorCode;
+		@Schema(description = "Formpipe error code")
+		private Integer errorCode;
 
-        @Schema(description = "Formpipe error message")
-        private String errorMessage;
+		@Schema(description = "Formpipe error message")
+		private String errorMessage;
 
-        @Schema(description = "Formpipe service name", nullable = true)
-        private String serviceName;
-    }
+		@Schema(description = "Formpipe service name", nullable = true)
+		private String serviceName;
+	}
 }

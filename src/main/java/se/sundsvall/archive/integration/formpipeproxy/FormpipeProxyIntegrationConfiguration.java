@@ -14,24 +14,23 @@ import feign.Request.Options;
 @Import(FeignConfiguration.class)
 class FormpipeProxyIntegrationConfiguration {
 
-    private final FormpipeProxyIntegrationProperties properties;
+	private final FormpipeProxyIntegrationProperties properties;
 
-    FormpipeProxyIntegrationConfiguration(final FormpipeProxyIntegrationProperties properties) {
-        this.properties = properties;
-    }
+	FormpipeProxyIntegrationConfiguration(final FormpipeProxyIntegrationProperties properties) {
+		this.properties = properties;
+	}
 
-    @Bean
-    FeignBuilderCustomizer feignCustomizer() {
-        return FeignMultiCustomizer.create()
-            .withRequestOptions(requestOptions())
-            .composeCustomizersToOne();
-    }
+	@Bean
+	FeignBuilderCustomizer feignCustomizer() {
+		return FeignMultiCustomizer.create()
+			.withRequestOptions(requestOptions())
+			.composeCustomizersToOne();
+	}
 
-    private Options requestOptions() {
-        return new Options(
-            properties.getConnectTimeout().toMillis(), MILLISECONDS,
-            properties.getReadTimeout().toMillis(), MILLISECONDS,
-            true
-        );
-    }
+	private Options requestOptions() {
+		return new Options(
+			properties.getConnectTimeout().toMillis(), MILLISECONDS,
+			properties.getReadTimeout().toMillis(), MILLISECONDS,
+			true);
+	}
 }

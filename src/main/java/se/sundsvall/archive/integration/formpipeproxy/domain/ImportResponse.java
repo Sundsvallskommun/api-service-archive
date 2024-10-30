@@ -9,23 +9,23 @@ import lombok.Setter;
 @Setter
 public class ImportResponse {
 
-    @JsonProperty("ErrorDetails")
-    private ErrorDetails errorDetails;
+	@JsonProperty("ErrorDetails")
+	private ErrorDetails errorDetails;
 
-    @JsonProperty("ImportedFileSetId")
-    private String importedFileSetId;
+	@JsonProperty("ImportedFileSetId")
+	private String importedFileSetId;
 
-    @Getter
-    @Setter
-    public static class ErrorDetails {
+	@Getter
+	@Setter
+	public static class ErrorDetails {
 
-        @JsonProperty("ErrorCode")
-        private Integer errorCode;
+		@JsonProperty("ErrorCode")
+		private Integer errorCode;
 
-        @JsonProperty("ErrorMessage")
-        private String errorMessage;
+		@JsonProperty("ErrorMessage")
+		private String errorMessage;
 
-        @JsonProperty("ServiceName")
-        private String serviceName;
-    }
+		@JsonProperty("ServiceName")
+		private String serviceName;
+	}
 }

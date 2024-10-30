@@ -18,7 +18,6 @@ _Acts as a gateway for integrating with Formpipe's proxy, enabling long-term doc
    ```bash
    git clone git@github.com:Sundsvallskommun/api-service-archive.git
    ```
-
 2. **Configure the application:**
 
    Before running the application, you need to set up configuration settings.
@@ -32,16 +31,15 @@ _Acts as a gateway for integrating with Formpipe's proxy, enabling long-term doc
 
 4. **Build and run the application:**
 
-     ```bash
-     mvn spring-boot:run
-     ```
+   ```bash
+   mvn spring-boot:run
+   ```
 
 ## Dependencies
 
 This microservice depends on the following services:
 
 - **Formpipe Proxy**
-
   - **Purpose:** API used in front of Formpipe LTA's WCF-based API as a REST API, to enable Java-based services and clients to long-term archive documents.
   - **Additional Information:** Refer to its [product page](https://www.formpipe.com/en/public-sector/software/long-term-archive/) to learn more
 
@@ -79,7 +77,6 @@ Configuration is crucial for the application to run successfully. Ensure all nec
   server:
     port: 8080
   ```
-
 - **External Service URLs:**
 
   ```yaml
