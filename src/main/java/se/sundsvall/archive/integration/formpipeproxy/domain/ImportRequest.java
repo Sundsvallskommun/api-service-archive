@@ -20,41 +20,41 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ImportRequest {
 
-    @JsonProperty("SubmissionAgreementId")
-    private String submissionAgreementId;
+	@JsonProperty("SubmissionAgreementId")
+	private String submissionAgreementId;
 
-    @JsonProperty("Uuid")
-    private String uuid;
+	@JsonProperty("Uuid")
+	private String uuid;
 
-    @JsonProperty("ConfidentialityLevel")
-    private Integer confidentialityLevel;
+	@JsonProperty("ConfidentialityLevel")
+	private Integer confidentialityLevel;
 
-    @JsonProperty("ConfidentialityDegradationDate")
-    private LocalDateTime confidentialityDegradationDate;
+	@JsonProperty("ConfidentialityDegradationDate")
+	private LocalDateTime confidentialityDegradationDate;
 
-    @JsonProperty("PersonalDataFlag")
-    private Boolean personalDataFlag;
+	@JsonProperty("PersonalDataFlag")
+	private Boolean personalDataFlag;
 
-    @JsonProperty("MetadataXml")
-    private String metadataXml;
+	@JsonProperty("MetadataXml")
+	private String metadataXml;
 
-    @JsonProperty("PreservationObject")
-    private PreservationObject preservationObject;
+	@JsonProperty("PreservationObject")
+	private PreservationObject preservationObject;
 
-    @Getter
-    @Setter
-    @Builder(setterPrefix = "with")
-    @NoArgsConstructor
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class PreservationObject {
+	@Getter
+	@Setter
+	@Builder(setterPrefix = "with")
+	@NoArgsConstructor
+	@AllArgsConstructor(access = AccessLevel.PRIVATE)
+	public static class PreservationObject {
 
-        @JsonProperty("FileName")
-        private String fileName;
+		@JsonProperty("FileName")
+		private String fileName;
 
-        @JsonProperty("FileExtension")
-        private String fileExtension;
+		@JsonProperty("FileExtension")
+		private String fileExtension;
 
-        @JsonProperty("Data")
-        private String data;
-    }
+		@JsonProperty("Data")
+		private String data;
+	}
 }

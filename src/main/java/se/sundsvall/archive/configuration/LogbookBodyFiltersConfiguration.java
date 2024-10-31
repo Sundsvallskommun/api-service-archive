@@ -9,13 +9,13 @@ import org.zalando.logbook.BodyFilter;
 @Configuration
 class LogbookBodyFiltersConfiguration {
 
-    @Bean
-    BodyFilter incomingRequestFilePropertyFilter() {
-        return jsonPath("$..file").replace(s -> String.format("<file contents omitted (%d char(s))>", s.length()));
-    }
+	@Bean
+	BodyFilter incomingRequestFilePropertyFilter() {
+		return jsonPath("$..file").replace(s -> String.format("<file contents omitted (%d char(s))>", s.length()));
+	}
 
-    @Bean
-    BodyFilter outgoingRequestDataFilter() {
-        return jsonPath("$..Data").replace(s -> String.format("<file contents omitted (%d char(s))>", s.length()));
-    }
+	@Bean
+	BodyFilter outgoingRequestDataFilter() {
+		return jsonPath("$..Data").replace(s -> String.format("<file contents omitted (%d char(s))>", s.length()));
+	}
 }
