@@ -13,7 +13,7 @@
 	<version>2.0</version>
 	<name>api-service-archive</name>
 	<properties>
-		<jsoup.version>1.18.1</jsoup.version>
+		<jsoup.version>1.18.3</jsoup.version>
 		<xsoup.version>0.3.7</xsoup.version>
 	</properties>
 	<dependencies>
