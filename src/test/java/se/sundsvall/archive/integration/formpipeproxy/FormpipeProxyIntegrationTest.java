@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.zalando.problem.Status;
 import org.zalando.problem.ThrowableProblem;
-
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 

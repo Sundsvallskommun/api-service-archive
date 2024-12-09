@@ -4,7 +4,9 @@
 		"url": "/api/import"
 	},
 	"response": {
-		"headers": {"Content-Type": "application/json;charset=UTF-8"},
+		"headers": {
+			"Content-Type": "application/json;charset=UTF-8"
+		},
 		"bodyFileName": "test1_successful/responses/formpipeproxy.response.json",
 		"status": 200
 	},
