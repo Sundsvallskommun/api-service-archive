@@ -2,7 +2,6 @@ package se.sundsvall.archive.integration.formpipeproxy;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 

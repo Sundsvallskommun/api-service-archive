@@ -3,12 +3,10 @@ package se.sundsvall.archive.api.domain.byggr;
 import static java.util.UUID.randomUUID;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
-
 import se.sundsvall.archive.api.domain.ArchiveResponse;
 import se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyMapper;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;

@@ -4,12 +4,10 @@ import static org.zalando.problem.Status.BAD_GATEWAY;
 import static org.zalando.problem.Status.INTERNAL_SERVER_ERROR;
 
 import java.util.Optional;
-
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
-
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 

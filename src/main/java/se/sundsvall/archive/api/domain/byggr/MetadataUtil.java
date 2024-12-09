@@ -3,14 +3,12 @@ package se.sundsvall.archive.api.domain.byggr;
 import static org.zalando.problem.Status.BAD_REQUEST;
 
 import java.util.Optional;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import org.zalando.problem.Problem;
-
 import us.codecraft.xsoup.Xsoup;
 
 @Component

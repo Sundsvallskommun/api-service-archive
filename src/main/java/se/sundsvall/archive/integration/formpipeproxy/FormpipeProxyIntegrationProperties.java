@@ -1,11 +1,9 @@
 package se.sundsvall.archive.integration.formpipeproxy;
 
 import java.time.Duration;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
