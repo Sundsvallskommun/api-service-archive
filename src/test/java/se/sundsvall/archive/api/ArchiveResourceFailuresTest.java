@@ -28,6 +28,7 @@ import se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration;
 class ArchiveResourceFailuresTest {
 
 	private static final String PATH_TEMPLATE = "/{municipalityId}/archive/byggr";
+	private static final String MUNICIPALITY_ID = "2281";
 
 	@MockitoBean
 	private FormpipeProxyIntegration mockFormpipeProxyIntegration;
@@ -42,12 +43,11 @@ class ArchiveResourceFailuresTest {
 	void emptyRequest() {
 
 		// Arrange.
-		final var municipalityId = "2281";
 		final var request = new ByggRArchiveRequest();
 
 		// Act
 		final var response = webTestClient.post()
-			.uri(builder -> builder.path(PATH_TEMPLATE).build(Map.of("municipalityId", municipalityId)))
+			.uri(builder -> builder.path(PATH_TEMPLATE).build(Map.of("municipalityId", MUNICIPALITY_ID)))
 			.contentType(APPLICATION_JSON)
 			.bodyValue(request)
 			.exchange()
@@ -74,7 +74,6 @@ class ArchiveResourceFailuresTest {
 	void emptyAttachment() {
 
 		// Arrange.
-		final var municipalityId = "2281";
 		final var request = ByggRArchiveRequest.builder()
 			.withAttachment(new Attachment())
 			.withMetadata("metadata")
@@ -82,7 +81,7 @@ class ArchiveResourceFailuresTest {
 
 		// Act
 		final var response = webTestClient.post()
-			.uri(builder -> builder.path(PATH_TEMPLATE).build(Map.of("municipalityId", municipalityId)))
+			.uri(builder -> builder.path(PATH_TEMPLATE).build(Map.of("municipalityId", MUNICIPALITY_ID)))
 			.contentType(APPLICATION_JSON)
 			.bodyValue(request)
 			.exchange()

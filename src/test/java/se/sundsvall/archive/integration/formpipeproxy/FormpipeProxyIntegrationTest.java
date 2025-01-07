@@ -7,32 +7,26 @@ import static org.mockito.Mockito.when;
 import static se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration.INTEGRATION_NAME;
 import static se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration.INTEGRATION_NAME_PROPERTY;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 import org.zalando.problem.Status;
 import org.zalando.problem.ThrowableProblem;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
 
-@ActiveProfiles("junit")
 @ExtendWith(MockitoExtension.class)
 class FormpipeProxyIntegrationTest {
 
 	@Mock
 	private FormpipeProxyClient mockClient;
 
+	@InjectMocks
 	private FormpipeProxyIntegration formpipeProxyIntegration;
-
-	@BeforeEach
-	void setUp() {
-		formpipeProxyIntegration = new FormpipeProxyIntegration(mockClient);
-	}
 
 	@Test
 	void doImport400BadRequest() {
@@ -48,9 +42,7 @@ class FormpipeProxyIntegrationTest {
 				assertThat(thrownProblem.getMessage()).isEqualTo("Client error");
 				assertThat(thrownProblem.getParameters()).containsEntry(INTEGRATION_NAME_PROPERTY, INTEGRATION_NAME);
 				assertThat(thrownProblem.getStatus()).isEqualTo(Status.INTERNAL_SERVER_ERROR);
-				assertThat(thrownProblem.getCause()).satisfies(cause -> {
-					assertThat(cause.getStatus()).isEqualTo(Status.BAD_GATEWAY);
-				});
+				assertThat(thrownProblem.getCause()).satisfies(cause -> assertThat(cause.getStatus()).isEqualTo(Status.BAD_GATEWAY));
 			});
 	}
 

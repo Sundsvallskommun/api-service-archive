@@ -33,11 +33,11 @@ class MetadataUtil {
 		final var doc = Jsoup.parse(metadataXml, Parser.xmlParser());
 
 		final var matches = evaluateXPath(doc, "//ArkivobjektHandling/Handlingstyp");
-		if (matches.size() != 1) {
+		if (matches == null || matches.size() != 1) {
 			throw Problem.builder()
 				.withStatus(BAD_REQUEST)
 				.withTitle("Invalid metadata")
-				.withDetail("Unable to extract 'Handlingstyp' from metadata. Found " + matches.size() + " matching node(s)")
+				.withDetail("Unable to extract 'Handlingstyp' from metadata. Found " + (matches != null ? matches.size() : "0") + " matching node(s)")
 				.build();
 		}
 
