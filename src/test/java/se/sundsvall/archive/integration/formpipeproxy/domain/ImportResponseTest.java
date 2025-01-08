@@ -3,9 +3,7 @@ package se.sundsvall.archive.integration.formpipeproxy.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("junit")
 class ImportResponseTest {
 
 	@Test
