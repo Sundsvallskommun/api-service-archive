@@ -1,29 +1,29 @@
 openapi: 3.0.1
 info:
   title: api-archive
-  contact: {}
+  contact: { }
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "2.0"
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:64304
+    description: Generated server url
 paths:
   /{municipalityId}/archive/byggr:
     post:
       tags:
-      - Archive resources
+        - Archive resources
       summary: Submit a ByggR archive request
       operationId: byggR
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
       requestBody:
         content:
           application/json:
@@ -31,36 +31,36 @@ paths:
               $ref: "#/components/schemas/ByggRArchiveRequest"
         required: true
       responses:
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "502":
-          description: Bad Gateway
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ArchiveResponse"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "502":
+          description: Bad Gateway
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /api-docs:
     get:
       tags:
-      - API
+        - API
       summary: OpenAPI
       operationId: getApiDocs
       responses:
@@ -75,37 +75,6 @@ paths:
       x-wso2-mutual-ssl: Optional
 components:
   schemas:
-    Attachment:
-      required:
-      - extension
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-        extension:
-          pattern: ^\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|doc|docx|txt|xls|xlsx|odt|ods|pptx|ppt|msg)$
-          type: string
-          example: .pdf
-        file:
-          maxLength: 100000000
-          minLength: 0
-          type: string
-          description: BASE64-encoded file contents (Max 100Mb)
-          example: YXBhCg==
-      description: Bilaga
-    ByggRArchiveRequest:
-      required:
-      - attachment
-      - metadata
-      type: object
-      properties:
-        attachment:
-          $ref: "#/components/schemas/Attachment"
-        metadata:
-          type: string
-          description: Metadata XML
-      description: Request för att arkivera bygglovshandlingar
     Problem:
       type: object
       properties:
@@ -121,9 +90,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        detail:
-          type: string
         title:
+          type: string
+        detail:
           type: string
     StatusType:
       type: object
@@ -256,9 +225,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        detail:
-          type: string
         title:
+          type: string
+        detail:
           type: string
         suppressed:
           type: array
@@ -300,6 +269,36 @@ components:
           type: string
         message:
           type: string
+    Attachment:
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+        extension:
+          minLength: 1
+          pattern: ^\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|doc|docx|txt|xls|xlsx|odt|ods|pptx|ppt|msg)$
+          type: string
+          example: .pdf
+        file:
+          maxLength: 100000000
+          minLength: 0
+          type: string
+          description: BASE64-encoded file contents (Max 100Mb)
+          example: YXBhCg==
+      description: Bilaga
+    ByggRArchiveRequest:
+      required:
+        - attachment
+      type: object
+      properties:
+        attachment:
+          $ref: "#/components/schemas/Attachment"
+        metadata:
+          minLength: 1
+          type: string
+          description: Metadata XML
+      description: Request för att arkivera bygglovshandlingar
     ArchiveResponse:
       type: object
       properties:
@@ -326,4 +325,4 @@ components:
           nullable: true
       description: Error details
       nullable: true
-  securitySchemes: {}
+  securitySchemes: { }
