@@ -1,29 +1,29 @@
 openapi: 3.0.1
 info:
   title: api-archive
-  contact: { }
+  contact: {}
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "2.0"
 servers:
-  - url: http://localhost:64304
-    description: Generated server url
+- url: http://localhost:8080
+  description: Generated server url
 paths:
   /{municipalityId}/archive/byggr:
     post:
       tags:
-        - Archive resources
+      - Archive resources
       summary: Submit a ByggR archive request
       operationId: byggR
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
       requestBody:
         content:
           application/json:
@@ -43,8 +43,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server error
           content:
@@ -60,7 +60,7 @@ paths:
   /api-docs:
     get:
       tags:
-        - API
+      - API
       summary: OpenAPI
       operationId: getApiDocs
       responses:
@@ -270,6 +270,9 @@ components:
         message:
           type: string
     Attachment:
+      required:
+      - extension
+      - name
       type: object
       properties:
         name:
@@ -289,7 +292,8 @@ components:
       description: Bilaga
     ByggRArchiveRequest:
       required:
-        - attachment
+      - attachment
+      - metadata
       type: object
       properties:
         attachment:
@@ -325,4 +329,4 @@ components:
           nullable: true
       description: Error details
       nullable: true
-  securitySchemes: { }
+  securitySchemes: {}
