@@ -23,11 +23,12 @@ public class Attachment {
 
 	@NotBlank
 	@Pattern(regexp = "^\\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|doc|docx|txt|xls|xlsx|odt|ods|pptx|ppt|msg)$", message = "extension must be valid. Must match regex: {regexp}")
-	@Schema(example = ".pdf")
+	@Schema(examples = ".pdf")
 	private String extension;
 
 	@Size(max = 100000000)
 	@ValidBase64
-	@Schema(description = "BASE64-encoded file contents (Max 100Mb)", example = "YXBhCg==", maxLength = 100000000)
+	@Schema(description = "BASE64-encoded file contents (Max 100Mb)", examples = "YXBhCg==", maxLength = 100000000)
 	private String file;
+
 }
