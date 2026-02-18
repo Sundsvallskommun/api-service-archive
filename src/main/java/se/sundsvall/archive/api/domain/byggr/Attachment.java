@@ -1,7 +1,5 @@
 package se.sundsvall.archive.api.domain.byggr;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -11,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import se.sundsvall.dept44.common.validators.annotation.ValidBase64;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Data
 @Builder(setterPrefix = "with")

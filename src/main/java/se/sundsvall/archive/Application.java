@@ -1,7 +1,5 @@
 package se.sundsvall.archive;
 
-import static org.springframework.boot.SpringApplication.run;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import se.sundsvall.dept44.ServiceApplication;
 import se.sundsvall.dept44.util.jacoco.ExcludeFromJacocoGeneratedCoverageReport;
+
+import static org.springframework.boot.SpringApplication.run;
 
 @ServiceApplication
 @EnableFeignClients

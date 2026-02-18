@@ -1,10 +1,10 @@
 package se.sundsvall.archive.integration.formpipeproxy;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class FormpipeProxyMapperTest {
 

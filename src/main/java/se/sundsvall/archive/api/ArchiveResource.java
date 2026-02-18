@@ -1,7 +1,5 @@
 package se.sundsvall.archive.api;
 
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,6 +20,8 @@ import se.sundsvall.archive.api.domain.byggr.ByggRArchiveRequest;
 import se.sundsvall.archive.api.domain.byggr.ByggRFormpipeProxyMapper;
 import se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration;
 import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
+
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 
 @RestController
 @RequestMapping("/{municipalityId}/archive")
