@@ -1,8 +1,5 @@
 package se.sundsvall.archive.api.domain.byggr;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import java.util.Base64;
@@ -10,6 +7,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class AttachmentTest {
 

@@ -1,12 +1,5 @@
 package se.sundsvall.archive.integration.formpipeproxy;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration.INTEGRATION_NAME;
-import static se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration.INTEGRATION_NAME_PROPERTY;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +11,13 @@ import org.zalando.problem.Status;
 import org.zalando.problem.ThrowableProblem;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration.INTEGRATION_NAME;
+import static se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyIntegration.INTEGRATION_NAME_PROPERTY;
 
 @ExtendWith(MockitoExtension.class)
 class FormpipeProxyIntegrationTest {
