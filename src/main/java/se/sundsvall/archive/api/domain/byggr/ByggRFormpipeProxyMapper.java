@@ -3,14 +3,14 @@ package se.sundsvall.archive.api.domain.byggr;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.zalando.problem.Problem;
-import org.zalando.problem.Status;
 import se.sundsvall.archive.api.domain.ArchiveResponse;
 import se.sundsvall.archive.integration.formpipeproxy.FormpipeProxyMapper;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportRequest;
 import se.sundsvall.archive.integration.formpipeproxy.domain.ImportResponse;
+import se.sundsvall.dept44.problem.Problem;
 
 import static java.util.UUID.randomUUID;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Component
 public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiveRequest, ArchiveResponse> {
@@ -18,7 +18,7 @@ public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiv
 	private final String submissionAgreementId;
 	private final MetadataUtil metadataUtil;
 
-	public ByggRFormpipeProxyMapper(@Value("${byggr.submission-agreement-id}") final String submissionAgreementId, final MetadataUtil metadataUtil) {
+	ByggRFormpipeProxyMapper(@Value("${byggr.submission-agreement-id}") final String submissionAgreementId, final MetadataUtil metadataUtil) {
 		this.submissionAgreementId = submissionAgreementId;
 		this.metadataUtil = metadataUtil;
 	}
@@ -27,7 +27,7 @@ public class ByggRFormpipeProxyMapper implements FormpipeProxyMapper<ByggRArchiv
 	public ImportRequest map(final ByggRArchiveRequest request) {
 		if (!metadataUtil.isValidMetadata(request.getMetadata())) {
 			throw Problem.builder()
-				.withStatus(Status.BAD_REQUEST)
+				.withStatus(BAD_REQUEST)
 				.withTitle("Invalid metadata")
 				.withDetail("Metadata is missing file extension(s)")
 				.build();
