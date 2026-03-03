@@ -7,7 +7,9 @@
 		"headers": {
 			"Content-Type": "application/json;charset=UTF-8"
 		},
-		"bodyFileName": "test1_successful/responses/formpipeproxy.response.json",
+		"jsonBody": {
+			"ImportedFileSetId": "d7A8d74A-9639-408d-a96d-087cca6b0975"
+		},
 		"status": 200
 	},
 	"name": "formpipeproxy_import",

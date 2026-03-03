@@ -15,13 +15,13 @@ class ByggRArchiveIT extends AbstractAppTest {
 	private static final String SERVICE_PATH = "/2281/archive/byggr";
 
 	@Test
-	void test1_successful() {
+	void test1_successfulRequest() {
 		setupCall()
 			.withServicePath(SERVICE_PATH)
 			.withHttpMethod(POST)
-			.withRequest("byggr.request")
+			.withRequest("request.json")
 			.withExpectedResponseStatus(OK)
-			.withExpectedResponse("byggr.expected-response")
+			.withExpectedResponse("response.json")
 			.sendRequestAndVerifyResponse();
 	}
 }
