@@ -106,10 +106,10 @@ components:
             $ref: "#/components/schemas/Violation"
         title:
           type: string
-        detail:
-          type: string
         causeAsProblem:
           $ref: "#/components/schemas/ThrowableProblem"
+        detail:
+          type: string
         instance:
           type: string
           format: uri
@@ -145,6 +145,8 @@ components:
           minLength: 1
         extension:
           type: string
+          examples:
+          - .pdf
           minLength: 1
           pattern: ^\.(bmp|gif|tif|tiff|jpeg|jpg|png|htm|html|pdf|rtf|doc|docx|txt|xls|xlsx|odt|ods|pptx|ppt|msg)$
         file:
@@ -176,9 +178,12 @@ components:
       description: Archive response
       properties:
         archiveId:
-          type: string
+          type:
+          - string
+          - "null"
           description: Archive ID
         errorDetails:
+          type: "null"
           $ref: "#/components/schemas/ErrorDetails"
           description: Error details
     ErrorDetails:
@@ -192,6 +197,8 @@ components:
           type: string
           description: Formpipe error message
         serviceName:
-          type: string
+          type:
+          - string
+          - "null"
           description: Formpipe service name
   securitySchemes: {}
