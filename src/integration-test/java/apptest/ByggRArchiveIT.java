@@ -1,13 +1,12 @@
 package apptest;
 
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpStatus.OK;
-
 import org.junit.jupiter.api.Test;
-
 import se.sundsvall.archive.Application;
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
+
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(files = "classpath:/ByggRArchiveIT/", classes = Application.class)
 class ByggRArchiveIT extends AbstractAppTest {
